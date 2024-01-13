@@ -3,6 +3,8 @@ import 'package:dummylogin/components/buildinbox.dart';
 import 'package:dummylogin/components/button.dart';
 import 'package:dummylogin/components/easytext.dart';
 import 'package:dummylogin/widgets/email_description_screen.dart';
+import 'package:dummylogin/widgets/emailcomposescreen.dart';
+import 'package:dummylogin/widgets/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:dummylogin/models/inbox_mail.dart';
 import 'package:dummylogin/models/mail_model.dart';
@@ -31,66 +33,109 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           actions: const [
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(
-                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fguy&psig=AOvVaw29uLw7Lsj9Dil3EtUpZxPz&ust=1705148157971000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCKC5-YTq14MDFQAAAAAdAAAAABAE"),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(
+                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fguy&psig=AOvVaw29uLw7Lsj9Dil3EtUpZxPz&ust=1705148157971000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCKC5-YTq14MDFQAAAAAdAAAAABAE"),
+              ),
             ),
           ],
         ),
-
-        // Drawer for navigation options
         drawer: Drawer(
           child: ListView(
+            padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    CircleAvatar(
+                      radius: 30,
+                      // Add your user profile image here
+                      backgroundImage: NetworkImage(
+                          'https://example.com/your-profile-image.jpg'),
+                    ),
+                    SizedBox(height: 10),
                     Text(
-                      'Inbox App',
+                      'Atul Keshari',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      'test34@gmail.com',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
                     ),
                   ],
                 ),
               ),
-              // Navigation items (tabs)
               ListTile(
-                title: Text('Primary'),
+                leading: Icon(Icons.mail),
+                title: Text('Email'),
                 onTap: () {
-                  // Handle Primary tab navigation
-                  print('Primary tab clicked');
-                  Navigator.pop(context); // Close the Drawer
+                  // Handle email menu item tap
+                  Navigator.pop(context); // Close the drawer
                 },
               ),
               ListTile(
+                leading: Icon(Icons.star),
+                title: Text('Primary'),
+                onTap: () {
+                  // Handle primary menu item tap
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.people),
                 title: Text('Social'),
                 onTap: () {
-                  // Handle Social tab navigation
-                  print('Social tab clicked');
-                  Navigator.pop(context); // Close the Drawer
+                  // Handle social menu item tap
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.campaign),
+                title: Text('Promotion'),
+                onTap: () {
+                  // Handle promotion menu item tap
+                  Navigator.pop(context); // Close the drawer
+                },
+              ),
+              SizedBox(
+                height: 350,
+              ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('LogOut'),
+                onTap: () {
+                  // Handle promotion menu item tap
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              LoginPage())); // Close the drawer
                 },
               ),
             ],
           ),
         ),
-
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // _bottomsheet(context);
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => EmailComposeScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EmailComposeScreen()));
           },
           backgroundColor: Colors.indigoAccent[400],
           child: const Icon(Icons.add),
         ),
-
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
@@ -135,10 +180,10 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => ReceivedEmailScreen(
-                                  sender: "Lalit",
-                                  time: DateTime.now().toString(),
-                                  title: "Title",
-                                  content: "random sample content mail body",
+                                  sender: getMail[index].title,
+                                  time: getMail[index].time,
+                                  title: getMail[index].message,
+                                  content: getMail[index].des,
                                 )));
                   },
                   child: Column(

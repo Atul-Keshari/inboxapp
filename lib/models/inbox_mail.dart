@@ -19,7 +19,7 @@ List<Mail> getMail = [
       title: "lalit singh rajput",
       message: "Software",
       isTrue: true,
-      des: "Hi, are you available for this projects?",
+      des: "Hi, are you available for this projects? or I'll assign this",
       time: "11:40"),
   Mail(
       title: "Atul Keshari",
