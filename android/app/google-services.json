@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046661521936",
+    "project_id": "dummylogin-60378",
+    "storage_bucket": "dummylogin-60378.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046661521936:android:1fcbda4b734c94c0d72095",
+        "android_client_info": {
+          "package_name": "com.example.dummylogin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0jwCMt5ok0Kv1fdWzWFQuEZKOb8KF2qw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
