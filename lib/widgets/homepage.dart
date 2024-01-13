@@ -1,13 +1,15 @@
-import 'package:dummylogin/components/appbar.dart';
+// import 'package:dummylogin/components/appbar.dart';
 import 'package:dummylogin/components/buildinbox.dart';
 import 'package:dummylogin/components/button.dart';
 import 'package:dummylogin/components/easytext.dart';
+import 'package:dummylogin/widgets/email_description_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dummylogin/models/inbox_mail.dart';
 import 'package:dummylogin/models/mail_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,6 +29,58 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: const [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage(
+                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fguy&psig=AOvVaw29uLw7Lsj9Dil3EtUpZxPz&ust=1705148157971000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCKC5-YTq14MDFQAAAAAdAAAAABAE"),
+            ),
+          ],
+        ),
+
+        // Drawer for navigation options
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Inbox App',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Navigation items (tabs)
+              ListTile(
+                title: Text('Primary'),
+                onTap: () {
+                  // Handle Primary tab navigation
+                  print('Primary tab clicked');
+                  Navigator.pop(context); // Close the Drawer
+                },
+              ),
+              ListTile(
+                title: Text('Social'),
+                onTap: () {
+                  // Handle Social tab navigation
+                  print('Social tab clicked');
+                  Navigator.pop(context); // Close the Drawer
+                },
+              ),
+            ],
+          ),
+        ),
+
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // _bottomsheet(context);
@@ -36,11 +90,12 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.indigoAccent[400],
           child: const Icon(Icons.add),
         ),
+
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
             child: Column(children: [
-              buildAppBar(context),
+              // buildAppBar(context),
               buildInbox(name: "Inbox"),
               buildPaddingStylishButton(),
               const SizedBox(
@@ -74,25 +129,38 @@ class _HomePageState extends State<HomePage> {
                   },
                   value: _value[index],
                 ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      getMail[index].title,
-                      style: TextStyle(
-                          color: getMail[index].isTrue
-                              ? Colors.lightBlueAccent[700]
-                              : Colors.deepPurple,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                    Text(
-                      getMail[index].message,
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                title: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReceivedEmailScreen(
+                                  sender: "Lalit",
+                                  time: DateTime.now().toString(),
+                                  title: "Title",
+                                  content: "random sample content mail body",
+                                )));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        getMail[index].title,
+                        style: TextStyle(
+                            color: getMail[index].isTrue
+                                ? Colors.lightBlueAccent[700]
+                                : Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                      Text(
+                        getMail[index].message,
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
                 subtitle: Text(getMail[index].des),
                 trailing: Text(getMail[index].time),
