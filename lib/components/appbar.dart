@@ -14,7 +14,14 @@ Widget buildAppBar(BuildContext context) {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20))),
           child: Icon(Icons.arrow_back)),
-      CircleAvatar(
+      IconButton(
+        icon: Icon(Icons.menu),
+        onPressed: () {
+          // Add your navigation logic here
+          print('Hamburger icon pressed');
+        },
+      ),
+      const CircleAvatar(
         radius: 30,
         backgroundImage: NetworkImage(
             "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fguy&psig=AOvVaw29uLw7Lsj9Dil3EtUpZxPz&ust=1705148157971000&source=images&cd=vfe&ved=0CBMQjRxqFwoTCKC5-YTq14MDFQAAAAAdAAAAABAE"),
